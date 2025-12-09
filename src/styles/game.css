@@ -1,0 +1,285 @@
+/* 공통 화면 레이아웃 */
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 16px;
+}
+
+.screen--dark {
+  background: #c1e4f3 ;
+  color: #5a3c11;
+}
+
+.screen--light {
+  background: #cdeffc;
+}
+
+.screen-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.logo-title {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #5a3c11;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.screen-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* 버튼 스타일 */
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #58c9a5;
+  color: #133527;
+  box-shadow: 0 4px 0 #349c7d;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #349c7d;
+}
+
+.btn-secondary {
+  background: #ffda9e;
+  color: #5a3c11;
+  box-shadow: 0 4px 0 #e3b467;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #e3b467;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #a38965;
+  border: 1px solid rgba(146, 118, 88, 0.4);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 공룡 캐릭터 */
+
+.dino-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.dino-wrapper--small {
+  width: 180px;
+  height: 180px;
+}
+
+.dino {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.dino-body {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 2; 
+}
+
+.dino-face-mask {
+  position: absolute;
+  z-index: 1;   /* 얼굴이 아래 */
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  overflow: hidden;
+  left: 48%;
+  top: 26%;
+}
+
+
+.dino-face-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 업로드 화면 */
+
+.upload-layout {
+  gap: 32px;
+}
+
+.upload-box {
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px dashed rgba(146, 118, 88, 0.4);
+  min-width: 260px;
+  width: 60vw;           
+  max-width: 450px;      
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.preview-area {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview-caption {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* 게임 화면 */
+
+.game-header {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.game-score {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.game-help {
+  font-size: 20px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+
+.game-area {
+  position: relative;
+  background: linear-gradient(#b6e9ff 0, #e6f8ff 40%, #fdf5e6 100%);
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.game-dino {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.game-obstacle {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.game-obstacle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.game-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 110px; /* ground.png 높이랑 비슷하게 */
+  background-image: url("../assets/ground.png");
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: auto 100%;  /* 높이를 110px에 맞추고, 가로는 자동 */
+}
+
+
+/* 게임 오버 */
+
+.gameover-score {
+  font-size: 18px;
+}
+
+.gameover-score span {
+  font-weight: 800;
+}
+
+.gameover-best {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* 게임 화면 전체를 꽉 채우기 */
+.screen--game {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;                 /* 위아래 여백 제거 */
+  align-items: stretch;       /* 가로로 꽉 차게 */
+}
+
+/* 헤더는 상단에 살짝 여백만 */
+.screen--game .game-header {
+  padding: 16px 24px;
+}
+
+/* 실제 게임 영역을 화면 전체로 */
+.game-area--full {
+  width: 100%;
+  height: calc(100vh - 60px); /* 헤더 높이만큼 뺀 나머지 */
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
