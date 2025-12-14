@@ -67,7 +67,7 @@ function GameScreen({ faceImageUrl, onGameOver }) {
     // 초기화
     dinoYRef.current = 0;
     dinoVyRef.current = 0;
-    obstaclesRef.current = [{ id: 0, x: GAME_WIDTH + 200 }];
+    obstaclesRef.current = [{ id: 0, x: GAME_WIDTH + 200, scale: 1 }];
     scoreRef.current = 0;
     setDinoY(0);
     setObstacles(obstaclesRef.current);
@@ -113,15 +113,22 @@ function GameScreen({ faceImageUrl, onGameOver }) {
     (max, o) => (o.x > max ? o.x : max),
     -Infinity
     );
+const minGap = 200;
+const maxGap = 600;
 
-    if (maxX < GAME_WIDTH - 200) {
-    // 200 ~ 600 사이 랜덤 간격
-    const distance = 200 + Math.random() * 400;
-    newObs.push({
-        id: nextObstacleId.current++,
-        x: GAME_WIDTH + distance,
-    });
-    }
+if (maxX < GAME_WIDTH - 200) {
+  const distance = minGap + Math.random() * (maxGap - minGap);
+
+  // ✅ 장애물 크기 랜덤 (0.7 ~ 1.4배)
+  const scale = 0.7 + Math.random() * 0.7;
+
+  newObs.push({
+    id: nextObstacleId.current++,
+    x: GAME_WIDTH + distance,
+    scale,
+  });
+}
+
 
       obstaclesRef.current = newObs;
       setObstacles(newObs);
@@ -136,7 +143,8 @@ function GameScreen({ faceImageUrl, onGameOver }) {
         const dinoLeft = DINO_X;
         const dinoRight = DINO_X + 60;
         const obsLeft = o.x;
-        const obsRight = o.x + OBSTACLE_WIDTH;
+        const obsRight = o.x + OBSTACLE_WIDTH * o.scale;
+
 
         const horizontalOverlap = dinoRight > obsLeft && dinoLeft < obsRight;
         const tooLow = currentY < COLLISION_HEIGHT;
@@ -181,20 +189,25 @@ function GameScreen({ faceImageUrl, onGameOver }) {
       </div>
 
       {/* 장애물 */}
-      {obstacles.map((o) => (
-        <div
-          key={o.id}
-          className="game-obstacle"
-          style={{
-            left: o.x,
-            bottom: 80,
-            width: OBSTACLE_WIDTH,
-            height: OBSTACLE_HEIGHT,
-          }}
-        >
-          <img src={cactusImg} alt="장애물" />
-        </div>
-      ))}
+      {obstacles.map((o) => {
+  const w = OBSTACLE_WIDTH * o.scale;
+  const h = OBSTACLE_HEIGHT * o.scale;
+
+  return (
+    <div
+      key={o.id}
+      className="game-obstacle"
+      style={{
+        left: o.x,
+        bottom: 80,           // 너가 쓰는 바닥 높이에 맞춰
+        width: w,
+        height: h,
+      }}
+    >
+      <img src={cactusImg} alt="장애물" />
+    </div>
+  );
+})}
 
       {/* 바닥선 */}
       <div className="game-ground" />
